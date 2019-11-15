@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import PeopleContext from "../context/peopleContext";
 
-const People = ({ people }) => {
+const People = () => {
+  const context = useContext(PeopleContext);
+  const people = context.people;
   return (
     <div className="col">
       <h2>People:</h2>

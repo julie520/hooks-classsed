@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import PeopContext from "../context/peopleContext";
 
-const Form = ({ addPerson }) => {
+const Form = () => {
   const [person, setPerson] = useState({
     firstName: "",
     lastName: ""
   });
+
+  const context = useContext(PeopContext);
 
   const { firstName, lastName } = person;
 
@@ -15,7 +18,7 @@ const Form = ({ addPerson }) => {
   const onSubmit = event => {
     event.preventDefault();
     if (person.firstName.trim() === "" || person.lastName.trim() === "") return;
-    addPerson(person);
+    context.addPerson(person);
     setPerson({
       firstName: "",
       lastName: ""
