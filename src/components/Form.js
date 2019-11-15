@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useMemo, useRef } from "react";
 import PeopContext from "../context/peopleContext";
 
 const Form = () => {
@@ -8,6 +8,8 @@ const Form = () => {
   });
 
   const context = useContext(PeopContext);
+
+  const firstNameInput = useRef(null);
 
   const { firstName, lastName } = person;
 
@@ -23,7 +25,13 @@ const Form = () => {
       firstName: "",
       lastName: ""
     });
+    firstNameInput.current.focus();
   };
+
+  const printNumberOfPeople = () =>
+    console.log(`Number of people: ${context.people.length}`);
+
+  useMemo(() => printNumberOfPeople(), [printNumberOfPeople]);
 
   return (
     <div className="col">
@@ -37,6 +45,7 @@ const Form = () => {
             name="firstName"
             placeholder="First Name"
             value={firstName}
+            ref={firstNameInput}
             onChange={onChange}
           />
         </div>
